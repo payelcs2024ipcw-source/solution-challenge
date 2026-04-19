@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# API Keys - never commit these
+lib/services/gemini_service.dart
+lib/services/weather_service.dart
