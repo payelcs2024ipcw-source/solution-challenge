@@ -38,6 +38,12 @@ In 2-3 sentences, explain to the volunteer why this task matters and what they s
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Matched Tasks')),
+      floatingActionButton: FloatingActionButton.extended(
+      onPressed: () => Navigator.pushNamed(context, '/volunteer/map'),
+      icon: const Icon(Icons.map),
+      label: const Text('View Map'),
+      backgroundColor: Colors.green,
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('needs').snapshots(),
         builder: (context, snapshot) {
@@ -85,3 +91,4 @@ In 2-3 sentences, explain to the volunteer why this task matters and what they s
     );
   }
 }
+
