@@ -4,6 +4,7 @@ import 'firebase_options.dart';
 import 'screens/volunteer/login_screen.dart';
 import 'screens/volunteer/profile_screen.dart';
 import 'screens/volunteer/tasks_screen.dart';
+import 'screens/volunteer/chatbot_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/volunteer/login': (_) => const VolunteerLoginScreen(),
         '/volunteer/profile': (_) => const VolunteerProfileScreen(),
         '/volunteer/tasks': (_) => const TasksScreen(),
+        '/volunteer/chatbot': (_) => const ChatbotScreen(),
       },
     );
   }

@@ -1,8 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
+
+  Future<String> _getAIExplanation(Map<String, dynamic> task) async {
+    final apiKey = 'YOUR_GEMINI_API_KEY';
+    final response = await http.post(
+      Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'contents': [
+          {
+            'parts': [
+              {
+                'text': '''A volunteer has been matched to this community task:
+Title: ${task['title']}
+Category: ${task['category']}
+Urgency: ${task['urgency']}
+Description: ${task['description']}
+Location: ${task['location']}
+
+In 2-3 sentences, explain to the volunteer why this task matters and what they should bring or prepare.'''
+              }
+            ]
+          }
+        ]
+      }),
+    );
+    final data = jsonDecode(response.body);
+    return data['candidates'][0]['content']['parts'][0]['text'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +52,31 @@ class TasksScreen extends StatelessWidget {
                 title: Text(data['title'] ?? 'Unnamed Task'),
                 subtitle: Text('${data['category']} • ${data['urgency']} urgency'),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                onTap: () async {
+                  final explanation = await _getAIExplanation(data);
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (_) => Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(data['title'] ?? '', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          const SizedBox(height: 8),
+                          Text('📍 ${data['location']}  •  🔴 ${data['urgency']} urgency'),
+                          const SizedBox(height: 12),
+                          Text(explanation),
+                          const SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pushNamed(context, '/volunteer/chatbot'),
+                            child: const Text('Ask AI Assistant'),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
             },
           );
