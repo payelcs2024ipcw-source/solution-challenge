@@ -6,6 +6,10 @@ import 'screens/volunteer/profile_screen.dart';
 import 'screens/volunteer/tasks_screen.dart';
 import 'screens/volunteer/chatbot_screen.dart';
 import 'screens/volunteer/map_screen.dart';
+import 'screens/ngo/ngo_login_screen.dart';
+import 'screens/ngo/ngo_dashboard.dart';
+import 'screens/ngo/submit_need_screen.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +47,9 @@ class MyApp extends StatelessWidget {
         '/volunteer/tasks': (_) => const TasksScreen(),
         '/volunteer/chatbot': (_) => const ChatbotScreen(),
         '/volunteer/map': (_) => const MapScreen(),
+        '/': (_) => const NgoLoginScreen(),
+        '/ngo-dashboard': (_) => const NgoDashboard(),
+        '/submit-need': (_) => const SubmitNeedScreen(),
       },
     );
   }
