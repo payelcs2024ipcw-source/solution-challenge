@@ -35,6 +35,9 @@ class _NgoDashboardState extends State<NgoDashboard> {
       geminiMatch = '';
     });
 
+    print('Fetching volunteers...');  // ADD THIS
+  
+
     final volunteersSnapshot = await FirebaseFirestore.instance
         .collection('volunteers')
         .where('availability', isEqualTo: 'available')
