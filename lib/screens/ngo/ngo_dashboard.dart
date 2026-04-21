@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../services/weather_service.dart';
-import '../../services/gemini_service.dart';
+import '../../services/weather_services.dart';
+import '../../services/gemini_services.dart';
 
 class NgoDashboard extends StatefulWidget {
   const NgoDashboard({super.key});
