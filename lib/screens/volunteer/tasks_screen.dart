@@ -45,7 +45,7 @@ In 2-3 sentences, explain to the volunteer why this task matters and what they s
       backgroundColor: Colors.green,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('needs').snapshots(),
+        stream: FirebaseFirestore.instance.collection('community_needs').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
           final docs = snapshot.data!.docs;

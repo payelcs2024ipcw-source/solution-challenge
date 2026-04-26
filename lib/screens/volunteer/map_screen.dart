@@ -43,7 +43,7 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   Future<void> _loadTaskMarkers() async {
-    final snapshot = await FirebaseFirestore.instance.collection('needs').get();
+    final snapshot = await FirebaseFirestore.instance.collection('community_needs').get();
     final markers = <Marker>{};
 
     for (final doc in snapshot.docs) {
