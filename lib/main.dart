@@ -9,6 +9,7 @@ import 'screens/volunteer/map_screen.dart';
 import 'screens/ngo/ngo_login_screen.dart';
 import 'screens/ngo/ngo_dashboard.dart';
 import 'screens/ngo/submit_need_screen.dart';
+import 'screens/ngo/ngo_maps_screen.dart';
 
 
 
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => const NgoLoginScreen(),
         '/ngo-dashboard': (_) => const NgoDashboard(),
         '/submit-need': (_) => const SubmitNeedScreen(),
+        '/ngo-map': (_) => const NgoMapScreen(),
       },
     );
   }
