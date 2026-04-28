@@ -15,7 +15,7 @@ class _MapScreenState extends State<MapScreen> {
   Position? _currentPosition;
   Set<Marker> _markers = {};
   Set<Polyline> _polylines = {};
-  final String _mapsApiKey = 'YOUR_GOOGLE_MAPS_API_KEY';
+  final String _mapsApiKey = 'AIzaSyD8-LGeKYA5pJGfTESJol2LAoCW5QFvg50';
 
   @override
   void initState() {
@@ -48,8 +48,8 @@ class _MapScreenState extends State<MapScreen> {
 
     for (final doc in snapshot.docs) {
       final data = doc.data();
-      final lat = data['lat'] as double?;
-      final lng = data['lng'] as double?;
+      final lat = (data['latitude'] ?? data['lat']) as double?;
+      final lng = (data['longitude'] ?? data['lng']) as double?;
       if (lat == null || lng == null) continue;
 
       // Color by urgency
@@ -64,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
         position: LatLng(lat, lng),
         icon: BitmapDescriptor.defaultMarkerWithHue(hue),
         infoWindow: InfoWindow(
-          title: data['title'],
+          title: data['category'] ?? 'Need',
           snippet: '${data['category']} • ${data['urgency']} urgency',
         ),
         onTap: () => _drawRouteTo(LatLng(lat, lng)),

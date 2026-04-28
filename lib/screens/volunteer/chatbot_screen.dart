@@ -14,7 +14,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   final _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
   bool _loading = false;
-  final String _apiKey = 'YOUR_GEMINI_API_KEY'; // replace this
+  final String _apiKey = 'AIzaSyAg-AsiX2VFurZAkhF_W5jp8VLVrC_UXSU'; // replace this
 
   Future<void> _sendMessage(String userText) async {
     setState(() {
@@ -24,7 +24,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
     _controller.clear();
 
     final response = await http.post(
-      Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$_apiKey'),
+      Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$_apiKey'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'contents': [

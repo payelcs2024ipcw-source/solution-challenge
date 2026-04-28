@@ -7,9 +7,9 @@ class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
   Future<String> _getAIExplanation(Map<String, dynamic> task) async {
-    final apiKey = 'YOUR_GEMINI_API_KEY';
+    final apiKey = 'AIzaSyAg-AsiX2VFurZAkhF_W5jp8VLVrC_UXSU';
     final response = await http.post(
-      Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey'),
+      Uri.parse('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=$apiKey'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'contents': [
@@ -17,7 +17,7 @@ class TasksScreen extends StatelessWidget {
             'parts': [
               {
                 'text': '''A volunteer has been matched to this community task:
-Title: ${task['title']}
+Title: ${task['category']}
 Category: ${task['category']}
 Urgency: ${task['urgency']}
 Description: ${task['description']}
@@ -55,8 +55,8 @@ In 2-3 sentences, explain to the volunteer why this task matters and what they s
             itemBuilder: (context, i) {
               final data = docs[i].data() as Map<String, dynamic>;
               return ListTile(
-                title: Text(data['title'] ?? 'Unnamed Task'),
-                subtitle: Text('${data['category']} • ${data['urgency']} urgency'),
+                title: Text(data['category'] ?? 'Community Need'),
+                subtitle: Text('${data['description'] ?? ''} • ${data['urgency'] ?? ''} urgency'),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () async {
                   final explanation = await _getAIExplanation(data);
